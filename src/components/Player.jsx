@@ -1,15 +1,17 @@
 import { Play, Pause } from "@/icons/PlayerIcons";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export function Player() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentSong, setCurrentSong] = useState(null);
   const audioRef = useRef();
+  useEffect(() => {
+    audioRef.current.src = `/music/1/01.mp3`;
+  }, []);
   const handleClick = () => {
     if (isPlaying) {
       audioRef.current.pause();
     } else {
-      audioRef.current.src = `/music/1/01.mp3`;
       audioRef.current.play();
       audioRef.current.volume = 0.1;
     }
@@ -27,6 +29,7 @@ export function Player() {
       </div>
       <div className="grid place-content-center"></div>
       <audio ref={audioRef} />
+      {/* guardando el elemento html "audio" en una referencia que apunte al mismo */}
     </div>
   );
 }
