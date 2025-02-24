@@ -11,10 +11,12 @@
   "dependencies": {
     "@astrojs/react": "^4.2.0",
     "@astrojs/svelte": "^7.0.4",
+    "@radix-ui/react-slider": "^1.2.3",
     "@tailwindcss/vite": "^4.0.6",
     "@types/react": "^19.0.8",
     "@types/react-dom": "^19.0.3",
     "astro": "^5.2.5",
+    "clsx": "^2.1.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "svelte": "^5.20.0",
