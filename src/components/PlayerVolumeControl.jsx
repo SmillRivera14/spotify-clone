@@ -8,13 +8,21 @@ export const PlayerVolumeControl = () => {
   const setVolume = usePlayerStore((state) => state.setVolume);
   const previosVolumeRef = useRef(volume);
   const isVolumeSilenced = volume < 0.1;
+
   const handleClickVolumen = () => {
     if (isVolumeSilenced) {
-      setVolume(previosVolumeRef.current);
+      setVolume(previosVolumeRef.current); // Restaurar el volumen anterior
     } else {
-      previosVolumeRef.current = volume;
-      setVolume(0);
+      previosVolumeRef.current = volume || 1; // Guardar volumen antes de silenciar (si es 0, usar 1 como fallback)
+      setVolume(0); // Silenciar
     }
+  };
+
+  const handleSliderChange = (value) => {
+    const [newValue] = value;
+    const volumeValue = newValue / 100;
+    previosVolumeRef.current = volumeValue; // Actualizar volumen previo al mover el slider
+    setVolume(volumeValue);
   };
 
   return (
@@ -30,12 +38,9 @@ export const PlayerVolumeControl = () => {
         defaultValue={[100]}
         max={100}
         min={0}
+        value={[volume * 100]}
         className="w-[95px]"
-        onValueChange={(value) => {
-          const [newValue] = value;
-          const volumeValue = newValue / 100;
-          setVolume(volumeValue);
-        }}
+        onValueChange={handleSliderChange} // Usar la nueva función para actualizar `previosVolumeRef`
       />
     </div>
   );

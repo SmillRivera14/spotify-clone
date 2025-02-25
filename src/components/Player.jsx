@@ -3,6 +3,7 @@ import { usePlayerStore } from "@/store/playerStore";
 import { useEffect, useRef } from "react";
 import { PlayerVolumeControl } from "./PlayerVolumeControl";
 import { PlayerCurrentSong } from "./PlayerCurrentSong";
+import { SongControl } from "./SongControl";
 
 export function Player() {
   const { isPlaying, setIsPlaying, currentMusic, volume } = usePlayerStore(
@@ -38,13 +39,14 @@ export function Player() {
         <PlayerCurrentSong {...currentMusic.song} />
       </div>
       <div className="grid place-content-center gap-4 flex-1">
-        <div className="flex justify-center">
+        <div className="flex flex-col items-center justify-center">
           <button
             className="bg-white rounded-full p-2 text-black"
             onClick={handleClick}
           >
             {isPlaying ? <Pause /> : <Play />}
           </button>
+          <SongControl audio={audioRef} />
           <audio ref={audioRef} />
           {/* guardando el elemento html "audio" en una referencia que apunte al mismo */}
         </div>
