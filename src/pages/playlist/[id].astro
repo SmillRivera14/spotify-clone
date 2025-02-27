@@ -1,7 +1,8 @@
 ---
 import Layout from "../../layouts/Layout.astro"
-import PlayListItemCard from "@/components/PlayListItemCard.astro"
 import { allPlaylists, songs } from "@/lib/data"
+import MusicTable from "@/components/MusicTable.astro"
+import { CardPlayButton } from "@/components/CardPlayButton";
 
 const {id} = Astro.params
 const playlist = allPlaylists.find(playlist => playlist.id === id);
@@ -11,7 +12,7 @@ const playListSongs = songs.filter(song => song.albumId === playlist?.albumId)
 <Layout>
     <div
     id="playlist-container"
-    class="relative flex flex-col bg-zinc-900 overflow-x-hidden bg-gradient-to-t  from-zinc-900 via-zinc-900/80 rounded-lg"
+    class="relative flex flex-col bg-zinc-900 overflow-x-hidden bg-gradient-to-t  from-zinc-950 via-zinc-900/90 rounded-lg"
     style={`background-color: ${playlist?.color.accent}`}
     transition:name=`playlist ${id} box`
   >
@@ -50,14 +51,11 @@ const playListSongs = songs.filter(song => song.albumId === playlist?.albumId)
         </div>
       </div>
     </header>
-
-    <div class="relative z-10 px-6 pt-10">
-      <div
-        class="absolute inset-0 bg-gradient-to-t from-zinc-900 via-zinc-900/80"
-      >
-      </div>
+        <div class="pl-6 pt-6">
+      <CardPlayButton client:load id={id} size="large" />
     </div>
-
-    <style></style>
+    <section class="p-6">
+      <MusicTable songs={playListSongs}/>
+    </section>
   </div>
 </Layout>

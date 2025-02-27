@@ -1,7 +1,7 @@
 import { Pause, Play } from "@/icons/PlayerIcons";
 import { usePlayerStore } from "@/store/playerStore"; //Estado global
 
-export function CardPlayButton({ id }) {
+export function CardPlayButton({ id, size = "small" }) {
   const { currentMusic, isPlaying, setIsPlaying, setCurrentMusic } =
     usePlayerStore((state) => state);
 
@@ -22,12 +22,18 @@ export function CardPlayButton({ id }) {
       });
   };
 
+  const iconClassName = size === "samll" ? "w-4 h-4" : "w-5 h-5";
+
   return (
     <button
       onClick={handleClick}
-      className="card-play-button rounded-full bg-green-500 p-4 text-black"
+      className="card-play-button rounded-full bg-green-500 p-4 text-black hover:scale-105 transition hover:bg-green-400"
     >
-      {isPlayingPlaylist ? <Pause /> : <Play />}
+      {isPlayingPlaylist ? (
+        <Pause className={iconClassName} />
+      ) : (
+        <Play className={iconClassName} />
+      )}
     </button>
   );
 }
