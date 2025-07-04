@@ -49,6 +49,5 @@ spotify-clone/
 
 Inspirado en el diseño original de Spotify. 
 Proyecto con fines educativos.
-
 [Midudev](https://www.youtube.com/watch?v=WRc8lz-bp78&t=4980s)
----
+
